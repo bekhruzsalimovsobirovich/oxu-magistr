@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Subjects\Requests;
+namespace App\Domain\Specialities\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubjectRequest extends FormRequest
+class SpecialityFilterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class StoreSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:subjects,name',
-            'speciality_id' => 'required|exists:specialities,id',
-            'description' => 'sometimes'
+            'building_id' => 'required',
         ];
     }
 }

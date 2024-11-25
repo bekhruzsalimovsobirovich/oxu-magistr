@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Domain\Subjects\Resources;
+namespace App\Domain\Specialities\Resources;
 
-use App\Domain\Specialities\Models\Speciality;
-use App\Domain\Specialities\Resources\SpecialityResource;
+use App\Domain\Buildings\Resources\BuildingResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SubjectResource extends JsonResource
+class SpecialityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,8 +18,7 @@ class SubjectResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->description,
-            'specialities' => SpecialityResource::collection($this->specialities)
+            'buildings' => BuildingResource::collection($this->buildings)
         ];
     }
 }

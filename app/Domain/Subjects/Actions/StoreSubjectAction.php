@@ -22,6 +22,8 @@ class StoreSubjectAction
             $subject->name = $dto->getName();
             $subject->description = $dto->getDescription();
             $subject->save();
+
+            $subject->specialities()->attach($dto->getSpecialityId());
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;
