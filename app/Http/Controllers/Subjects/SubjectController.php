@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Subjects;
 
+use App\Domain\Specialities\Models\Speciality;
 use App\Domain\Subjects\Actions\StoreSubjectAction;
 use App\Domain\Subjects\Actions\UpdateSubjectAction;
 use App\Domain\Subjects\DTO\StoreSubjectDTO;

@@ -9,6 +9,7 @@ use App\Domain\Specialities\Repositories\SpecialityRepository;
 use App\Domain\Specialities\Requests\SpecialityFilterRequest;
 use App\Domain\Specialities\Requests\StoreSpecialityRequest;
 use App\Domain\Specialities\Resources\SpecialityResource;
+use App\Domain\Subjects\Resources\SubjectResource;
 use App\Filters\SpecialityFilter;
 use App\Http\Controllers\Controller;
 use Exception;
@@ -48,6 +49,11 @@ class SpecialityController extends Controller
         $filter = app()->make(SpecialityFilter::class, ['queryParams' => array_filter($request->validated())]);
 
         return $this->successResponse('', SpecialityResource::collection($this->specialities->getAll($filter)));
+    }
+
+    public function specialitySubject(Speciality $speciality)
+    {
+        return $this->successResponse('',SubjectResource::collection($speciality->subjects->makeHidden(['specialities'])));
     }
 
     /**
