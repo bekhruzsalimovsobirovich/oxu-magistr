@@ -22,8 +22,7 @@ class StoreSpecialityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'building_id' => 'required|exists:buildings,id',
+            'name' => 'required'
         ];
     }
 }

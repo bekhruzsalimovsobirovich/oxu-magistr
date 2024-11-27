@@ -23,10 +23,9 @@ class SpecialityRepository
     /**
      * @return Builder[]|Collection
      */
-    public function getAll($filter): Collection|array
+    public function getAll(): Collection|array
     {
         return Speciality::query()
-            ->Filter($filter)
             ->get()
             ->sortBy('name');
     }

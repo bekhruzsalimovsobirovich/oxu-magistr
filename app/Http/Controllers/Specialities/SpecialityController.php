@@ -42,13 +42,10 @@ class SpecialityController extends Controller
 
     /**
      * @return JsonResponse
-     * @throws BindingResolutionException
      */
-    public function getAll(SpecialityFilterRequest $request)
+    public function getAll()
     {
-        $filter = app()->make(SpecialityFilter::class, ['queryParams' => array_filter($request->validated())]);
-
-        return $this->successResponse('', SpecialityResource::collection($this->specialities->getAll($filter)));
+        return $this->successResponse('', SpecialityResource::collection($this->specialities->getAll()));
     }
 
     public function specialitySubject(Speciality $speciality)

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Buildings\BuildingController;
 use App\Http\Controllers\Specialities\SpecialityController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Subjects\SubjectController;
@@ -24,7 +23,6 @@ Route::post('login',[AuthController::class,'login']);
 Route::post('students',[StudentController::class,'store']);
 
 Route::get('subjects',[SubjectController::class,'getAll']);
-Route::get('buildings',[BuildingController::class,'getAll']);
 Route::get('specialities',[SpecialityController::class,'getAll']);
 Route::get('speciality/{speciality}/subjects',[SpecialityController::class,'specialitySubject']);
 

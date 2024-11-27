@@ -2,7 +2,6 @@
 
 namespace App\Domain\Specialities\Resources;
 
-use App\Domain\Buildings\Resources\BuildingResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,8 +16,7 @@ class SpecialityResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'buildings' => BuildingResource::collection($this->buildings)
+            'name' => $this->name
         ];
     }
 }
