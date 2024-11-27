@@ -36,7 +36,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return $this->successResponse('', $this->subjects->paginate(\request()->query('pagination', 20)));
+        return SubjectResource::collection($this->subjects->paginate(\request()->query('pagination', 20)));
     }
 
     /**
