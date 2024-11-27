@@ -21,7 +21,6 @@ class StoreSpecialityAction
             $speciality = new Speciality();
             $speciality->name = $dto->getName();
             $speciality->save();
-            $speciality->buildings()->attach($dto->getBuildingId());
         }catch (Exception $exception){
             DB::rollBack();
             throw $exception;

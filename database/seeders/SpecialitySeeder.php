@@ -19,7 +19,8 @@ class SpecialitySeeder extends Seeder
             'Jismoniy tarbiya va sport mashg\'ulotlari nazariyasi va metodikasi',
             'Iqtisodiyot',
             'Pedagogika',
-            'Psixologiya'
+            'Psixologiya',
+            'Ta\'lim va tarbiya nazariyasi va metodikasi'
         ];
 
         foreach ($specialities as $speciality){
