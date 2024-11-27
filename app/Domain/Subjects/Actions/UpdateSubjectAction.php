@@ -23,6 +23,8 @@ class UpdateSubjectAction
             $subject->name = $dto->getName();
             $subject->description = $dto->getDescription();
             $subject->update();
+            $subject->specialities()->detach($dto->getCurrentSpecialityId());
+            $subject->specialities()->attach($dto->getSpecialityId());
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;

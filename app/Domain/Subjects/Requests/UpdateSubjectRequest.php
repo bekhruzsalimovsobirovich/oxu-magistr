@@ -22,6 +22,8 @@ class UpdateSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'speciality_id' => 'required|exists:specialities,id',
+            'current_speciality_id' => 'required|exists:specialities,id',
             'name' => 'required',
             'description' => 'sometimes',
             'subject' => 'sometimes|json'

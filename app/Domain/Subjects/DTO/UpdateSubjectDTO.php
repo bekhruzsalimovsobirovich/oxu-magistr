@@ -7,6 +7,16 @@ use App\Domain\Subjects\Models\Subject;
 class UpdateSubjectDTO
 {
     /**
+     * @var int
+     */
+    private int $current_speciality_id;
+
+    /**
+     * @var int
+     */
+    private int $speciality_id;
+
+    /**
      * @var string
      */
     private string $name;
@@ -28,11 +38,45 @@ class UpdateSubjectDTO
     public static function fromArray(array $data): UpdateSubjectDTO
     {
         $dto = new self();
+        $dto->setSpecialityId($data['speciality_id']);
+        $dto->setCurrentSpecialityId($data['current_speciality_id']);
         $dto->setName($data['name']);
         $dto->setDescription($data['description'] ?? null);
         $dto->setSubject($data['subject']);
 
         return $dto;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCurrentSpecialityId(): int
+    {
+        return $this->current_speciality_id;
+    }
+
+    /**
+     * @param int $current_speciality_id
+     */
+    public function setCurrentSpecialityId(int $current_speciality_id): void
+    {
+        $this->current_speciality_id = $current_speciality_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSpecialityId(): int
+    {
+        return $this->speciality_id;
+    }
+
+    /**
+     * @param int $speciality_id
+     */
+    public function setSpecialityId(int $speciality_id): void
+    {
+        $this->speciality_id = $speciality_id;
     }
 
     /**
