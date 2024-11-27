@@ -24,9 +24,12 @@ class SubjectRepository
     /**
      * @return Builder[]|Collection
      */
-    public function getAll(): Collection|array
+    public function getAll($speciality_id): Collection|array
     {
         return Subject::query()
+            ->whereHas('specialities', function ($query) use ($speciality_id) {
+                $query->where('speciality_id',$speciality_id);
+            })
             ->get()
             ->sortBy('name');
     }

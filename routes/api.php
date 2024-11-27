@@ -22,9 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('login',[AuthController::class,'login']);
 Route::post('students',[StudentController::class,'store']);
 
-Route::get('subjects',[SubjectController::class,'getAll']);
+Route::get('subjects/{speciality_id}',[SubjectController::class,'getAll']);
 Route::get('specialities',[SpecialityController::class,'getAll']);
-Route::get('speciality/{speciality}/subjects',[SpecialityController::class,'specialitySubject']);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth:sanctum','role:admin']], function (){
     Route::get('students',[StudentController::class,'paginate']);

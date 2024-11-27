@@ -41,9 +41,9 @@ class SubjectController extends Controller
     /**
      * @return JsonResponse
      */
-    public function getAll()
+    public function getAll($speciality_id)
     {
-        return $this->successResponse('', $this->subjects->getAll());
+        return $this->successResponse('', $this->subjects->getAll($speciality_id));
     }
 
     /**
