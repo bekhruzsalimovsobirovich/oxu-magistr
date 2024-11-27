@@ -16,6 +16,7 @@ class SubjectRepository
     public function paginate($pagination): LengthAwarePaginator
     {
         return Subject::query()
+            ->with('specialities')
             ->orderByDesc('id')
             ->paginate($pagination);
     }
