@@ -30,7 +30,6 @@ class SubjectRepository
             ->whereHas('specialities', function ($query) use ($speciality_id) {
                 $query->where('speciality_id',$speciality_id);
             })
-            ->get()
-            ->sortBy('name');
+            ->get();
     }
 }
