@@ -26,10 +26,14 @@ class SubjectRepository
      */
     public function getAll($speciality_id): Collection|array
     {
-        return Subject::query()
+        $subjects = Subject::query()
             ->whereHas('specialities', function ($query) use ($speciality_id) {
-                $query->where('speciality_id',$speciality_id);
+                $query->where('speciality_id', $speciality_id);
             })
             ->get();
+
+        return $subjects->filter(function ($subject) {
+            return $subject->students()->count() === 0;
+        });
     }
 }
