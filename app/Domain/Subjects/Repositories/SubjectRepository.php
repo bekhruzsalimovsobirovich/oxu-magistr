@@ -35,8 +35,6 @@ class SubjectRepository
                 return $subject->students()->count() === 0;
             });
 
-        return [
-            'data' => $subjects->values()->toArray()
-        ];
+        return $subjects->values()->toArray();
     }
 }
