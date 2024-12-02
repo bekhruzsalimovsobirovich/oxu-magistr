@@ -30,10 +30,13 @@ class SubjectRepository
             ->whereHas('specialities', function ($query) use ($speciality_id) {
                 $query->where('speciality_id', $speciality_id);
             })
-            ->get();
+            ->get()
+            ->filter(function ($subject) {
+                return $subject->students()->count() === 0;
+            });
 
-        return $subjects->filter(function ($subject) {
-            return $subject->students()->count() === 0;
-        });
+        return [
+            'data' => $subjects->values()->toArray()
+        ];
     }
 }
