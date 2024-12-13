@@ -20,7 +20,7 @@ class StudentResource extends JsonResource
             'fio' => $this->fio,
             'group' => $this->group,
             'phone' => $this->phone,
-            'subject' => $this->subjects
+            'subject' => SubjectResource::collection($this->subjects),
         ];
     }
 }
