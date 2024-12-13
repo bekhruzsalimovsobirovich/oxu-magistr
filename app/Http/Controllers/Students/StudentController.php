@@ -6,9 +6,12 @@ use App\Domain\Students\Actions\StoreStudentAction;
 use App\Domain\Students\DTO\StoreStudentDTO;
 use App\Domain\Students\Repositories\StudentRepository;
 use App\Domain\Students\Requests\StoreStudentRequest;
+use App\Domain\Students\Requests\StudentFilterRequest;
 use App\Domain\Students\Resources\StudentResource;
+use App\Filters\StudentFilter;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -30,10 +33,12 @@ class StudentController extends Controller
 
     /**
      * @return AnonymousResourceCollection
+     * @throws BindingResolutionException
      */
-    public function paginate()
+    public function paginate(StudentFilterRequest $request)
     {
-        return StudentResource::collection($this->students->paginate(\request()->query('pagination',20)));
+        $filter = app()->make(StudentFilter::class,['queryParams' => array_filter($request->validated())]);
+        return StudentResource::collection($this->students->paginate(\request()->query('pagination',20),$filter));
     }
 
     /**

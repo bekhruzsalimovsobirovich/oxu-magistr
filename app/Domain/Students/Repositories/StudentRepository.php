@@ -14,9 +14,10 @@ class StudentRepository
      * @param $pagination
      * @return LengthAwarePaginator
      */
-    public function paginate($pagination): LengthAwarePaginator
+    public function paginate($pagination,$filter): LengthAwarePaginator
     {
         return Student::query()
+            ->Filter($filter)
             ->orderByDesc('id')
             ->paginate($pagination);
     }
