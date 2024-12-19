@@ -4,6 +4,7 @@ namespace App\Domain\Students\Actions;
 
 use App\Domain\Students\DTO\StoreStudentDTO;
 use App\Domain\Students\Models\Student;
+use App\Domain\Subjects\Models\Subject;
 use Exception;
 use Illuminate\Support\Facades\DB;
 

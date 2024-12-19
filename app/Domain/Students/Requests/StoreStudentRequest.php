@@ -3,6 +3,8 @@
 namespace App\Domain\Students\Requests;
 
 use App\Domain\Students\Models\Student;
+use App\Domain\Subjects\Models\Subject;
+use App\Models\StudentSubject;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreStudentRequest extends FormRequest
@@ -21,24 +23,13 @@ class StoreStudentRequest extends FormRequest
             'subject_id' => [
                 'required',
                 'exists:subjects,id',
-                $this->validateUniqueSubjectForStudent(), // Custom validation rule
+                // Custom validation to ensure unique subject for the student
+                function ($attribute, $value, $fail) {
+                    if (StudentSubject::query()->where('subject_id', $value)->exists()) {
+                        $fail("The selected {$attribute} is already assigned to another student.");
+                    }
+                },
             ],
         ];
-    }
-
-    /**
-     * Custom validation rule to ensure the subject is unique for the student.
-     *
-     * @return \Closure
-     */
-    private function validateUniqueSubjectForStudent(): \Closure
-    {
-        return function ($attribute, $value, $fail) {
-            // Assume `Student` and `Subject` have a BelongsToMany relationship
-            $studentId = $this->route('student_id'); // Adjust as per your route or context
-            if ($studentId && Student::find($studentId)?->subjects()->where('subject_id', $value)->exists()) {
-                $fail('The selected subject is already assigned to the student.');
-            }
-        };
     }
 }
