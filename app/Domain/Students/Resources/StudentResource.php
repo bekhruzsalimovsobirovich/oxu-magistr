@@ -21,6 +21,7 @@ class StudentResource extends JsonResource
             'group' => $this->group,
             'phone' => $this->phone,
             'subject' => SubjectResource::collection($this->subjects),
+            'created_at' =>$this->created_at
         ];
     }
 }
