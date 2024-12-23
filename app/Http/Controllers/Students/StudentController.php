@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Students;
 
 use App\Domain\Students\Actions\StoreStudentAction;
 use App\Domain\Students\DTO\StoreStudentDTO;
+use App\Domain\Students\Models\Student;
 use App\Domain\Students\Repositories\StudentRepository;
 use App\Domain\Students\Requests\StoreStudentRequest;
 use App\Domain\Students\Requests\StudentFilterRequest;
@@ -56,5 +57,12 @@ class StudentController extends Controller
         } catch (Exception $exception) {
             return $this->errorResponse($exception->getMessage());
         }
+    }
+
+    public function destroy(Student $student)
+    {
+        $student->delete();
+
+        return $this->successResponse('Student deleted');
     }
 }
