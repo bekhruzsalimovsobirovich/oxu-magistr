@@ -7,6 +7,7 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class StudentFilter extends AbstractFilter
 {
+    public const FIO = 'fio';
     public const GROUP = 'group';
     public const SUBJECT_ID = 'subject_id';
     public const SPECIALITY_ID = 'speciality_id';
@@ -14,13 +15,19 @@ class StudentFilter extends AbstractFilter
     /**
      * @return array[]
      */
-    #[ArrayShape([self::GROUP => "array", self::SUBJECT_ID => "array", self::SPECIALITY_ID => "array"])] protected function getCallbacks(): array
+    #[ArrayShape([self::FIO => "array", self::GROUP => "array", self::SUBJECT_ID => "array", self::SPECIALITY_ID => "array"])] protected function getCallbacks(): array
     {
         return [
+            self::FIO => [$this, 'fio'],
             self::GROUP => [$this, 'group'],
             self::SUBJECT_ID => [$this, 'subject_id'],
             self::SPECIALITY_ID => [$this, 'speciality_id'],
         ];
+    }
+
+    public function fio(Builder $builder, $value): void
+    {
+        $builder->where('fio', 'like', '%' . $value . '%');
     }
 
     public function group(Builder $builder, $value): void

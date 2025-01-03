@@ -22,6 +22,7 @@ class StudentFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'fio' => 'sometimes',
             'group' => 'sometimes',
             'speciality_id' => 'sometimes|exists:specialities,id',
             'subject_id' => 'sometimes|exists:subjects,id'

@@ -16,18 +16,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class StudentExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
-//    /**
-//     * @var mixed
-//     */
-//    public mixed $request_id;
-//
-//    /**
-//     * @param $request_id
-//     */
-//    public function __construct($request_id)
-//    {
-//        $this->request_id = $request_id;
-//    }
+    /**
+     * @var mixed
+     */
+    public mixed $speciality_id;
+
+    /**
+     * @param $speciality_id
+     */
+    public function __construct($speciality_id)
+    {
+        $this->speciality_id = $speciality_id;
+    }
 
 
     /**
@@ -36,8 +36,13 @@ class StudentExport implements FromCollection, WithHeadings, WithMapping, WithEv
     public function collection()
     {
         return Student::query()
-            ->get()
-            ->sortBy('fio');
+            ->whereHas('subjects', function ($query) {
+                $query->whereHas('specialities', function ($subQuery) {
+                    $subQuery->where('speciality_id', $this->speciality_id);
+                });
+            })
+            ->orderBy('fio')
+            ->get();
     }
 
     /**
@@ -47,7 +52,7 @@ class StudentExport implements FromCollection, WithHeadings, WithMapping, WithEv
     {
         return [
             [
-                'FIO','Guruh','Telefon raqam','Yo\'nalish','Fan','Ro\'yxatdan o\'tgan sana'
+                'FIO', 'Guruh', 'Telefon raqam', 'Yo\'nalish', 'Fan', 'Ro\'yxatdan o\'tgan sana'
             ],
         ];
     }

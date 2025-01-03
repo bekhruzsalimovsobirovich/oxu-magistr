@@ -70,6 +70,6 @@ class StudentController extends Controller
 
     public function export()
     {
-        return Excel::download(new StudentExport(), 'students.xlsx');
+        return Excel::download(new StudentExport(\request()->query('speciality_id')), 'students.xlsx');
     }
 }
