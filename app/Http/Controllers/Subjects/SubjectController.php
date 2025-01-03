@@ -46,6 +46,11 @@ class SubjectController extends Controller
         return $this->successResponse('', $this->subjects->getAll($speciality_id));
     }
 
+    public function getAllWithSpeciality($speciality_id)
+    {
+        return $this->successResponse('', $this->subjects->getAllWithSpeciality($speciality_id));
+    }
+
     /**
      * Store a newly created resource in storage.
      */

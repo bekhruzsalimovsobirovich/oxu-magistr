@@ -23,6 +23,7 @@ Route::post('login',[AuthController::class,'login']);
 Route::post('students',[StudentController::class,'store']);
 
 Route::get('subjects/{speciality_id}',[SubjectController::class,'getAll']);
+Route::get('subject/all/{speciality_id}',[SubjectController::class,'getAllWithSpeciality']);
 Route::get('specialities',[SpecialityController::class,'getAll']);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth:sanctum','role:admin']], function (){

@@ -37,4 +37,13 @@ class SubjectRepository
 
         return $subjects->values()->toArray();
     }
+
+    public function getAllWithSpeciality($speciality_id): Collection|array
+    {
+        return Subject::query()
+            ->with(['specialities' => function ($query) use ($speciality_id) {
+                $query->where('speciality_id', $speciality_id);
+            }])
+            ->get();
+    }
 }
