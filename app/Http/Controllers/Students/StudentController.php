@@ -9,6 +9,7 @@ use App\Domain\Students\Repositories\StudentRepository;
 use App\Domain\Students\Requests\StoreStudentRequest;
 use App\Domain\Students\Requests\StudentFilterRequest;
 use App\Domain\Students\Resources\StudentResource;
+use App\Exports\StudentExport;
 use App\Filters\StudentFilter;
 use App\Http\Controllers\Controller;
 use Exception;
@@ -16,6 +17,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -64,5 +66,10 @@ class StudentController extends Controller
         $student->delete();
 
         return $this->successResponse('Student deleted');
+    }
+
+    public function export()
+    {
+        return Excel::download(new StudentExport(), 'students.xlsx');
     }
 }

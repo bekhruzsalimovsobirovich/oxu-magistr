@@ -27,6 +27,7 @@ Route::get('specialities',[SpecialityController::class,'getAll']);
 
 Route::group(['prefix' => 'admin','middleware' => ['auth:sanctum','role:admin']], function (){
     Route::get('students',[StudentController::class,'paginate']);
+    Route::get('export/students',[StudentController::class,'export']);
     Route::delete('students/{student}',[StudentController::class,'destroy']);
     Route::get('specialities',[SpecialityController::class,'paginate']);
     Route::post('specialities',[SpecialityController::class,'store']);
